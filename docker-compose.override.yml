@@ -1,0 +1,14 @@
+version: '3.5'
+
+services:
+
+  interpreter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: python-environment
+
+    ports:
+      - "80:80"
+    volumes:
+      - .:/app
