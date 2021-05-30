@@ -12,3 +12,6 @@ RUN poetry config virtualenvs.create false && poetry install
 
 FROM python-environment AS app
 COPY . .
+
+FROM python-environment as SITL
+CMD dronekit-sitl copter

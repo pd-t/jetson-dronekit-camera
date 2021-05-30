@@ -1,23 +1,18 @@
+from time import sleep
+
 from dronekit import connect
-import dronekit_sitl
 
-print("Start simulator (SITL)")
+print("Connecting")
+vehicle = connect('127.0.0.1:14551', wait_ready=True)
 
-sitl = dronekit_sitl.start_default()
-connection_string = sitl.connection_string()
 
-print("Connecting to vehicle on: %s" % (connection_string,))
-vehicle = connect(connection_string, wait_ready=True)
+@vehicle.on_message('CAMERA')
+def listener(self, name, message):
+    print('message: %s' % message)
 
-print("Get some vehicle attribute values:")
-print(" GPS: %s" % vehicle.gps_0)
-print(" Battery: %s" % vehicle.battery)
-print(" Last Heartbeat: %s" % vehicle.last_heartbeat)
-print(" Is Armable?: %s" % vehicle.is_armable)
-print(" System status: %s" % vehicle.system_status.state)
-print(" Mode: %s" % vehicle.mode.name)    # settable
+while True:
+    sleep(1)
 
 vehicle.close()
 
-sitl.stop()
 print("Completed")
