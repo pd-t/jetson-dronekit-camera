@@ -1,12 +1,25 @@
 version: '3.9'
 
 services:
+  sitl:
+    build:
+      context: sitl
+      target: sitl
+    ports:
+      - "5760:5760"
+
+  mavproxy:
+    depends_on:
+      - sitl
+    environment:
+      - VEHICLE_ADDR=tcp:sitl:5760
+      - GROUND_CONTROL_ADDR=127.0.0.1:14550
+    ports:
+      - "14550:14550"
 
   interpreter:
     build:
-      context: .
-      dockerfile: sitl.Dockerfile
+      context: app
       target: python-environment
-    network_mode: host
     volumes:
       - .:/app

@@ -1,8 +1,21 @@
 version: '3.9'
 
 services:
+  mavproxy:
+    environment:
+      - AIRCRAFT_NAME
+      - VEHICLE_TYPE
+      - VEHICLE_ADDR
+      - APP_ADDR
+    build:
+      context: mavproxy
+      target: mavproxy
+    ports:
+      - "14551:14551"
 
   app:
+    environment:
+      - APP_ADDR
     build:
-      context: .
+      context: app
       target: app

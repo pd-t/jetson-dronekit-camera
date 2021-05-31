@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "drone-kit-example"
+version = "0.1.0"
+description = ""
+authors = ["thomasf <tf@wogra.com>"]
+
+[tool.poetry.dependencies]
+python = "~3.7.9"
+dronekit = "^2.9.2"
+dronekit-sitl = "^3.3.0"
+
+[tool.poetry.dev-dependencies]
+flake8 = "^3.8.4"
+pytest = "^6.2.1"
+pytest-mock = "^3.5.1"
+pytest-flake8 = "^1.0.7"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
