@@ -1,9 +1,12 @@
-version: '3.5'
+version: '3.9'
 
 services:
+
   interpreter:
+    environment:
+      - VEHICLE_CONNECTION=/dev/ttyUSB0
     build:
-      context: app
+      context: .
       target: python-environment
     volumes:
       - .:/app
