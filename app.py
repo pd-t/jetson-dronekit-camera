@@ -16,15 +16,20 @@ class CameraVehicle(Vehicle):
         super(CameraVehicle, self).__init__(*args)
         self._camera = Camera()
 
-        @self.on_message('*')
+        @self.on_message('CAMERA_TRIGGER')
         def listener(self, name, message):
+            print(name, ",", message)
             self._camera.trigger()
 
 
 class ConnectionControl:
     def __init__(self, connection_string: str):
-        self.camera_vehicle = connect(connection_string,
-                                      vehicle_class=CameraVehicle)
+        self.camera_vehicle = connect(
+            connection_string,
+            baud=921600,
+            vehicle_class=CameraVehicle
+        )
+        pass
 
 
 if __name__ == '__main__':

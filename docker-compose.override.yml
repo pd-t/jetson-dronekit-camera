@@ -5,6 +5,8 @@ services:
   interpreter:
     environment:
       - VEHICLE_CONNECTION=/dev/ttyUSB0
+    devices:
+      - "/dev/ttyUSB0:/dev/ttyUSB0"
     build:
       context: .
       target: python-environment

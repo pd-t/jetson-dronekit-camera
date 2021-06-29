@@ -1,10 +1,11 @@
-FROM python:3.7.9 AS poetry
+FROM python:3.7.9 AS base
 RUN pip install poetry==1.1.4
-WORKDIR /app
 
-FROM poetry AS python-environment
+FROM base AS python-environment
+WORKDIR /app
 COPY *.toml *.lock ./
 RUN poetry config virtualenvs.create false && poetry install
+ENV PATH=/usr/local/bin:$PATH
 
 FROM python-environment AS app
 COPY . .
