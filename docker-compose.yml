@@ -10,3 +10,6 @@ services:
     build:
       context: .
       target: app
+    volumes:
+      - /tmp/argus_socket:/tmp/argus_socket
+      - ./data:/data

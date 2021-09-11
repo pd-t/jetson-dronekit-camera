@@ -3,12 +3,12 @@ version: '3.9'
 services:
 
   interpreter:
-    environment:
-      - VEHICLE_CONNECTION=/dev/ttyUSB0
-    devices:
-      - "/dev/ttyUSB0:/dev/ttyUSB0"
     build:
       context: .
       target: python-environment
+    runtime:
+      nvidia
     volumes:
+      - /tmp/argus_socket:/tmp/argus_socket
+      - ./data:/data
       - .:/app

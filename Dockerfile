@@ -1,11 +1,13 @@
-FROM python:3.7.9 AS base
-RUN pip install poetry==1.1.4
+FROM dustynv/jetson-inference:r32.5.0 AS base
+RUN python3 -m pip install -U pip \
+&& pip3 install poetry==1.1.7
 
 FROM base AS python-environment
+ENV LANG C.UTF-8
 WORKDIR /app
 COPY *.toml *.lock ./
-RUN poetry config virtualenvs.create false && poetry install
-ENV PATH=/usr/local/bin:$PATH
+RUN poetry config virtualenvs.create false \
+&& poetry install --no-interaction --no-ansi
 
 FROM python-environment AS app
 COPY . .
