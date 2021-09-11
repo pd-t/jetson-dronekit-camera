@@ -1,3 +1,4 @@
+'''
 from app.camera_manager import CameraManager
 from app.jetson_camera import JetsonCamera
 import os.path
@@ -22,4 +23,10 @@ def test_camera_manager():
         heading=1
     )
     assert True
+'''
 
+from app.example_threading import start_cameras
+
+
+def test_threading():
+    start_cameras()
