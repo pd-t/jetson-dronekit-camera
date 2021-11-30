@@ -12,7 +12,6 @@ class CameraVehicle(Vehicle):
         super(CameraVehicle, self).__init__(*args)
         camera_0 = JetsonCamera(camera_device='csi://0')
         camera_1 = JetsonCamera(camera_device='csi://1')
-        self.camera_manager = CameraManager(cameras=[camera_0, camera_1])
 
         @self.on_message('CAMERA_TRIGGER')
         def listener(self, name, message):
