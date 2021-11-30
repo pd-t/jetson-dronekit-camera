@@ -1,26 +1,29 @@
-import os
 from time import sleep
-
 from dronekit import connect, Vehicle
-
-from app.camera_manager import CameraManager
-from app.jetson_camera import JetsonCamera
+from app.camera import CameraManager
+from app.multiheadcamera import MultiHeadCamera
 
 
 class CameraVehicle(Vehicle):
     def __init__(self, *args):
         super(CameraVehicle, self).__init__(*args)
-        camera_0 = JetsonCamera(camera_device='csi://0')
-        camera_1 = JetsonCamera(camera_device='csi://1')
+        output_directory = self.create_directory('/data', True)
+        self.multi_head_camera = MultiHeadCamera(
+            video_sources=['csi://0',
+                           'csi://1'],
+            output_directory=output_directory
+        )
+        self.gps_logger = GPSLogger(output_directory=output_directory)
 
         @self.on_message('CAMERA_TRIGGER')
         def listener(self, name, message):
-            self.camera_manager.trigger(
+            self.gps_logger.log(
                 latitude=self.location.global_relative_frame.lat,
                 longitude=self.location.global_relative_frame.lon,
                 altitude=self.location.global_relative_frame.alt,
                 heading=self.heading
             )
+            self.multi_head_camera.capture()
 
 
 if __name__ == '__main__':
