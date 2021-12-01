@@ -4,7 +4,7 @@ from app.gpslogger import GPSLogger
 
 
 def test_gps_logger():
-    gps_logger = GPSLogger(output_directory='/data/test')
+    gps_logger = GPSLogger(output_directory='/app/data/test')
     gps_logger.log(
         latitude='123',
         longitude='456',

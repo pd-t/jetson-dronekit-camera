@@ -4,11 +4,12 @@ RUN python3 -m pip install -U pip \
 
 FROM base AS python-environment
 ENV LANG C.UTF-8
-WORKDIR /app
+
 COPY *.toml *.lock ./
 RUN poetry config virtualenvs.create false \
 && poetry install --no-interaction --no-ansi
 
 FROM python-environment AS app
-COPY . .
-ENTRYPOINT ["python3", "app.py"]
+COPY app /app/app
+WORKDIR /app
+CMD PYTHONPATH="." python3 app/main.py

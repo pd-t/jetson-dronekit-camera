@@ -4,7 +4,7 @@ from app.helper import create_directory
 
 
 def test_create_directory():
-    output_directory = '/date'
+    output_directory = '/app/date'
     created_directory = create_directory(output_directory=output_directory,
                                          timestamp_directory=False)
     assert output_directory == created_directory

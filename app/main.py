@@ -1,13 +1,16 @@
+import os
 from time import sleep
 from dronekit import connect, Vehicle
-from app.camera import CameraManager
+
+from app.helper import create_directory
+from app.gpslogger import GPSLogger
 from app.multiheadcamera import MultiHeadCamera
 
 
 class CameraVehicle(Vehicle):
     def __init__(self, *args):
         super(CameraVehicle, self).__init__(*args)
-        output_directory = self.create_directory('/data', True)
+        output_directory = create_directory('/app/data', True)
         self.multi_head_camera = MultiHeadCamera(
             video_sources=['csi://0',
                            'csi://1'],
