@@ -29,5 +29,16 @@ class GPSLogger:
             altitude: str,
             heading: str
             ):
-        msg = ';'.join([latitude, longitude, altitude, heading])
+        if not latitude:
+            latitude = 'unknown'
+        if not longitude:
+            longitude = 'unknown'
+        if not altitude:
+            altitude = 'unknown'
+        if not heading:
+            heading = 'unknown'
+        msg = ';'.join([str(latitude),
+                        str(longitude),
+                        str(altitude),
+                        str(heading)])
         self.logger.info(msg)

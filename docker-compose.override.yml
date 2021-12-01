@@ -8,18 +8,11 @@ services:
       target: python-environment
     runtime:
       nvidia
+    #devices:
+    #  - "/dev/ttyUSB0:/dev/ttyUSB0"
+    #environment:
+    #  - VEHICLE_CONNECTION=/dev/ttyUSB0
     volumes:
       - /tmp/argus_socket:/tmp/argus_socket
       - .:/app
-
-  interpreter-app:
-    build:
-      context: .
-      target: python-environment
-    devices:
-      - "/dev/ttyUSB0:/dev/ttyUSB0"
-    environment:
-      - VEHICLE_CONNECTION=/dev/ttyUSB0
-    volumes:
-      - /tmp/argus_socket:/tmp/argus_socket
-      - .:/app
+    working_dir: /app
