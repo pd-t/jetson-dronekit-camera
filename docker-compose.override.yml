@@ -10,7 +10,8 @@ services:
       nvidia
     #devices:
     #  - "/dev/ttyUSB0:/dev/ttyUSB0"
-    #environment:
+    environment:
+      - PYTHONPATH=.
     #  - VEHICLE_CONNECTION=/dev/ttyUSB0
     volumes:
       - /tmp/argus_socket:/tmp/argus_socket

@@ -1,5 +1,3 @@
-import os
-import datetime
 from typing import List
 from app.camera import CameraManager
 

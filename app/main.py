@@ -28,6 +28,10 @@ class CameraVehicle(Vehicle):
             )
             self.multi_head_camera.capture()
 
+        @self.on_message('GPS_RAW_INT')
+        def listener(self, name, message):
+            print(message)
+
 
 if __name__ == '__main__':
     VEHICLE_CONNECTION = os.getenv("VEHICLE_CONNECTION")
